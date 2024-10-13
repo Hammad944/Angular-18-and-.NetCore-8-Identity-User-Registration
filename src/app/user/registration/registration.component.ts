@@ -1,14 +1,15 @@
-import { CommonModule, NgIf, NgSwitch } from '@angular/common';
+import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
 import { AbstractControl, FormBuilder, ReactiveFormsModule, ValidatorFn, Validators } from '@angular/forms';
 import { FirstKeyPipe } from '../../shared/first-key.pipe';
 import { AuthService } from '../../shared/services/auth.service';
 import { ToastrService } from 'ngx-toastr';
+import { RouterLink } from '@angular/router';
 
 @Component({
   selector: 'app-registration',
   standalone: true,
-  imports: [ReactiveFormsModule, CommonModule, FirstKeyPipe],
+  imports: [ReactiveFormsModule, CommonModule, FirstKeyPipe, RouterLink],
   templateUrl: './registration.component.html',
   styles: ``
 })
@@ -52,7 +53,6 @@ export class RegistrationComponent {
             }
           },
           error: err => {
-            console.log(err);
             if (err.error.errors) {
               err.error.errors.forEach((x: any) => {
                 switch (x.code) {
@@ -73,7 +73,6 @@ export class RegistrationComponent {
           }
         })
     }
-    console.log(this.form.value)
   }
   hasDisplayableError(controlName: string): Boolean {
 
